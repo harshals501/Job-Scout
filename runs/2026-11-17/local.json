@@ -1,0 +1,7 @@
+{
+  "profile_id": "local",
+  "run_date": "2026-11-17",
+  "scanned": 0,
+  "notes": "All sources failed: greenhouse:anthropic, greenhouse:gitlab, greenhouse:figma, greenhouse:intercom, greenhouse:databricks, greenhouse:airtable, greenhouse:vercel, greenhouse:canonical, greenhouse:elastic, greenhouse:remotecom, lever:mistral, ashby:openai, ashby:notion, ashby:linear, ashby:zapier, ashby:cohere, ashby:elevenlabs, ashby:perplexity, ashby:deel, ashby:ramp, ashby:supabase, ashby:n8n, remotive, remoteok, jobicy, himalayas. A direct curl to api.greenhouse.io returned HTTP 403 from the environment's outbound proxy (CONNECT tunnel failed, response 403), confirming the network allowlist for this environment does not include any configured job-board or job-feed hosts. No candidates were produced, so no scoring, shortlisting, research or drafting was possible this run.",
+  "results": []
+}
