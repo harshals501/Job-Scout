@@ -1,0 +1,49 @@
+{
+  "_note": "Board slugs are a starter list and have not been checked against the live APIs. A wrong slug is logged and skipped; fix or remove it after the first run.",
+  "boards": {
+    "greenhouse": ["anthropic", "gitlab", "figma", "intercom", "databricks", "airtable", "vercel", "canonical", "elastic", "remotecom"],
+    "lever": ["mistral"],
+    "ashby": ["openai", "notion", "linear", "zapier", "cohere", "elevenlabs", "perplexity", "deel", "ramp", "supabase", "n8n"]
+  },
+  "feeds": {
+    "remotive": true,
+    "remoteok": true,
+    "jobicy": true,
+    "himalayas": true
+  },
+  "defaults": {
+    "max_age_days": 21,
+    "max_candidates": 40,
+    "title_include": [
+      "product manager",
+      "product lead",
+      "head of product",
+      "director of product",
+      "product owner",
+      "product experience",
+      "ai ux",
+      "ux lead",
+      "design lead",
+      "head of design",
+      "principal product designer",
+      "principal designer",
+      "staff product designer"
+    ],
+    "title_exclude": [
+      "intern",
+      "junior",
+      "associate product manager",
+      "product marketing",
+      "marketing manager",
+      "engineering manager",
+      "sales",
+      "account manager",
+      "data scientist",
+      "machine learning engineer"
+    ],
+    "ai_terms": [
+      "ai", "a.i.", "artificial intelligence", "llm", "genai", "generative", "machine learning", "ml",
+      "conversational", "agent", "agents", "agentic", "copilot", "assistant", "nlp"
+    ]
+  }
+}

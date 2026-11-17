@@ -1,0 +1,4 @@
+{"jobs":[
+ {"url":"https://example.com/remotive/1","title":"Head of Product (Conversational AI)","company_name":"Acme","candidate_required_location":"Worldwide","job_type":"contract","salary":"","publication_date":"2099-01-01T08:00:00","description":"<p>Work from anywhere.</p>"},
+ {"url":"https://example.com/gh/1","title":"Senior Product Manager, AI","company_name":"GitLab","candidate_required_location":"EMEA","publication_date":"2099-01-01T08:00:00","description":"dup of greenhouse"}
+]}

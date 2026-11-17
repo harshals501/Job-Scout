@@ -1,0 +1,6 @@
+{"jobs":[
+ {"absolute_url":"https://example.com/gh/1","title":"Senior Product Manager, AI","location":{"name":"Remote, EMEA"},"updated_at":"2099-01-01T10:00:00Z","content":"&lt;p&gt;Own our &lt;b&gt;LLM&lt;/b&gt; assistant roadmap.&lt;/p&gt;&lt;p&gt;Remote across Europe.&lt;/p&gt;"},
+ {"absolute_url":"https://example.com/gh/2","title":"Product Marketing Manager, AI","location":{"name":"Remote"},"updated_at":"2099-01-01T10:00:00Z","content":"AI marketing"},
+ {"absolute_url":"https://example.com/gh/3","title":"Product Manager, Billing","location":{"name":"Remote"},"updated_at":"2099-01-01T10:00:00Z","content":"Own invoicing and email flows for the billing team."},
+ {"absolute_url":"https://example.com/gh/4","title":"Product Manager, AI Agents","location":{"name":"Remote"},"updated_at":"2000-01-01T10:00:00Z","content":"Old posting about agents"}
+]}

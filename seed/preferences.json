@@ -1,0 +1,29 @@
+{
+  "home_location": "Pune, India (UTC+5:30)",
+  "target_titles": [
+    "AI Product Manager",
+    "Senior Product Manager, AI",
+    "Product Manager, Conversational AI",
+    "Product Manager, AI Agents",
+    "AI Product Experience Lead",
+    "Product Lead, AI",
+    "Fractional AI Product Lead"
+  ],
+  "adjacent_titles": [
+    "Head of Product Design, AI",
+    "Principal Product Designer, AI",
+    "AI UX Lead"
+  ],
+  "regions": ["worldwide", "emea", "us_overlap"],
+  "job_types": ["full_time", "contract", "fractional"],
+  "deal_breakers": [
+    "On-site or hybrid only",
+    "Requires residency or work authorisation in a single country with no international hiring",
+    "Pure ML engineering or data science role",
+    "Unpaid or commission-only"
+  ],
+  "preferred_domains": ["fintech", "healthcare", "enterprise saas", "conversational ai", "ai agents", "developer tools"],
+  "shortlist_size": 5,
+  "min_score": 3.5,
+  "outputs": ["outreach", "application"]
+}

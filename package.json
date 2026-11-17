@@ -1,0 +1,11 @@
+{
+  "name": "job-scout",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "profiles": "node scripts/db.mjs profiles",
+    "scan": "node scripts/fetch-jobs.mjs --profile local",
+    "test": "node test/run-tests.mjs"
+  }
+}

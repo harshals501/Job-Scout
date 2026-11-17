@@ -1,0 +1,4 @@
+{"jobs":[
+ {"jobUrl":"https://example.com/ashby/1","title":"Product Manager, AI","location":"San Francisco","isRemote":false,"employmentType":"FullTime","publishedAt":"2099-01-01T00:00:00Z","descriptionPlain":"Lead AI features. On-site in SF.","compensation":{"compensationTierSummary":"$200K - $260K"}},
+ {"jobUrl":"https://example.com/seen/1","title":"AI Product Lead","location":"Remote","isRemote":true,"publishedAt":"2099-01-01T00:00:00Z","descriptionPlain":"Already seen role."}
+]}
