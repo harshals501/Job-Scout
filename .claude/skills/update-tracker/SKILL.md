@@ -1,6 +1,6 @@
 ---
 name: update-tracker
-description: Save a job scout run by writing the run file, validating it and syncing it to the database. Use once per profile at the end of a run.
+description: Save a job scout run by writing the run file, validating it, and publishing the shortlist to the UI. Use once per profile at the end of a run.
 ---
 
 # Save the run
@@ -12,7 +12,7 @@ candidate, not only the shortlist, so nothing is rescored tomorrow.
 
 ```json
 {
-  "profile_id": "uuid-or-local",
+  "profile_id": "local",
   "run_date": "2026-11-16",
   "scanned": 37,
   "notes": "greenhouse:acme failed (404).",
@@ -32,31 +32,9 @@ candidate, not only the shortlist, so nothing is rescored tomorrow.
       },
       "verdict": "shortlist",
       "gate_failed": null,
-      "score": 4.2,
-      "grade": "B",
-      "dimensions": {
-        "role_fit": { "score": 4, "reason": "…" },
-        "ai_depth": { "score": 5, "reason": "…" },
-        "seniority_fit": { "score": 4, "reason": "…" },
-        "domain_fit": { "score": 4, "reason": "…" },
-        "reachability": { "score": 3, "reason": "…" },
-        "company_quality": { "score": 5, "reason": "…" }
-      },
-      "summary": "Two sentences at most.",
-      "flags": ["title_gap"],
-      "draft": {
-        "company_brief": "…",
-        "hook": "…",
-        "hook_source": "https://…",
-        "contact_hint": "Head of Product, via LinkedIn",
-        "outreach_subject": "…",
-        "outreach_body": "…",
-        "cover_note": "…",
-        "resume_tweaks": [
-          { "section": "Experience: SpringCT", "change": "reorder", "detail": "…", "why": "…" }
-        ],
-        "screening_questions": []
-      }
+      "fit_score": 4.2,
+      "email_context": "Subject idea, the one real hook, who to address it to.",
+      "cover_note": "Two or three sentences grounded in the resume."
     }
   ]
 }
@@ -66,11 +44,10 @@ Field rules:
 
 - `verdict`: `shortlist`, `pass` or `skip`.
 - `gate_failed`: `geography`, `job_type`, `role_family`, `deal_breaker` or null.
-  For `skip`, `score`, `grade` and `dimensions` may be null.
+  For `skip`, `fit_score` may be omitted.
 - `remote_scope`: `worldwide`, `emea`, `us_overlap`, `india`, `unclear` or `restricted`.
 - `employment_type`: `full_time`, `contract`, `fractional`, `part_time` or `unknown`.
-- `draft` is present only when `verdict` is `shortlist`. Leave out the outreach or
-  application fields the profile's `outputs` did not ask for.
+- `email_context` and `cover_note` are present only when `verdict` is `shortlist`.
 - Trim `description` to 1,500 characters.
 
 ## 2. Validate
@@ -79,13 +56,39 @@ Field rules:
 node scripts/db.mjs validate runs/<date>/<profile_id>.json
 ```
 
-Fix every reported problem and validate again before syncing.
+Fix every reported problem and validate again before publishing.
 
-## 3. Sync
+## 3. Publish the shortlist to the UI
 
-```bash
-node scripts/db.mjs sync runs/<date>/<profile_id>.json
+Write `data/latest.json` — just the shortlisted jobs, the only thing the UI shows:
+
+```json
+{
+  "run_date": "2026-11-16",
+  "scanned": 37,
+  "shortlisted": 3,
+  "jobs": [
+    {
+      "url": "https://…",
+      "company": "Notion",
+      "role": "Product Manager, AI",
+      "fit_score": 4.2,
+      "email_context": "…",
+      "cover_note": "…"
+    }
+  ]
+}
 ```
 
-In local mode this only confirms the file is valid and leaves it in `runs/`.
-Syncing never changes a job's status that the person has already set in the dashboard.
+Build it from this run's `shortlist` results only (map `job.title` to `role`).
+
+## 4. Commit and push
+
+```bash
+git add runs/ data/latest.json
+git commit -m "Run <date>: <n> shortlisted"
+git push
+```
+
+The UI reads `data/latest.json` straight from GitHub — pushing is what publishes
+it. Nothing else to run.

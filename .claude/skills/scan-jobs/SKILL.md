@@ -12,13 +12,13 @@ Scanning is done by a script, not by browsing. It is faster, cheaper and repeata
 1. Run:
 
    ```bash
-   node scripts/fetch-jobs.mjs --profile <profile_id>
+   node scripts/fetch-jobs.mjs --profile local
    ```
 
 2. Read the summary it prints: how many postings each source returned, how many
    passed the title filter, how many were already seen, and which sources failed.
 
-3. Read `work/<profile_id>/candidates.json`. Each candidate has:
+3. Read `work/local/candidates.json`. Each candidate has:
    `url, source, company, title, location, remote_hint, employment_type, salary, posted_at, description`.
 
 ## Rules
