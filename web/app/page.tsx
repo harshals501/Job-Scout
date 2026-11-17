@@ -1,9 +1,9 @@
 import { getShortlist } from '@/lib/data';
 
-function gradeClass(score: number) {
+function scoreClass(score: number) {
   if (score >= 4) return '';
-  if (score >= 3) return 'low';
-  return 'none';
+  if (score >= 3) return 'mid';
+  return 'low';
 }
 
 export default async function Page() {
@@ -11,15 +11,21 @@ export default async function Page() {
 
   return (
     <div className="shell">
-      <header className="topbar">
-        <a className="brand" href="/">Job Scout</a>
-        {data && <span className="who small">Last run {data.run_date}</span>}
-      </header>
+      <section className="hero">
+        <span className="kicker">AI Product Management · Remote</span>
+        <h1>Job Scout</h1>
+        <p className="sub">A daily shortlist of roles worth your time, scored against your profile, with the context ready to write the email.</p>
+        {data && <p className="meta-line">Last run {data.run_date}</p>}
+      </section>
 
       {!data ? (
-        <div className="notice">No shortlist yet. It shows up here after the first daily run.</div>
+        <div className="empty">
+          <div className="glyph">◎</div>
+          <h3>No shortlist yet</h3>
+          <p>Once the daily run finishes, jobs that clear the bar will show up here.</p>
+        </div>
       ) : (
-        <div className="stack">
+        <>
           <div className="stats">
             <div className="stat"><b>{data.scanned}</b><span>Scanned</span></div>
             <div className="stat"><b>{data.shortlisted}</b><span>Shortlisted</span></div>
@@ -27,41 +33,52 @@ export default async function Page() {
           </div>
 
           {data.jobs.length === 0 ? (
-            <div className="notice">Nothing cleared the bar in the last run.</div>
+            <div className="empty">
+              <div className="glyph">◎</div>
+              <h3>Nothing cleared the bar today</h3>
+              <p>{data.scanned} roles were scanned, but none scored high enough to shortlist. Check back tomorrow.</p>
+            </div>
           ) : (
             <ul className="jobs">
               {data.jobs.map((job) => (
-                <li className="card" key={job.url}>
-                  <div className="row spread">
+                <li className="job" key={job.url}>
+                  <div className="job-top">
                     <div>
                       <h2>{job.role}</h2>
-                      <div className="meta">{job.company}</div>
+                      <div className="company">{job.company}</div>
                     </div>
-                    <div className="row">
-                      <span className={`grade ${gradeClass(job.fit_score)}`}>{job.fit_score.toFixed(1)}</span>
-                      <a className="btn" href={job.url} target="_blank" rel="noreferrer">Open posting</a>
+                    <div className="job-actions">
+                      <span className={`score ${scoreClass(job.fit_score)}`} title="Fit score">{job.fit_score.toFixed(1)}</span>
+                      <a className="btn" href={job.url} target="_blank" rel="noreferrer">
+                        Open posting ↗
+                      </a>
                     </div>
                   </div>
 
-                  {job.email_context && (
-                    <details style={{ marginTop: 12 }}>
-                      <summary className="small muted" style={{ cursor: 'pointer' }}>Email context</summary>
-                      <p className="small" style={{ marginTop: 8, whiteSpace: 'pre-wrap' }}>{job.email_context}</p>
-                    </details>
-                  )}
-
-                  {job.cover_note && (
-                    <details style={{ marginTop: 8 }}>
-                      <summary className="small muted" style={{ cursor: 'pointer' }}>Cover note</summary>
-                      <p className="small" style={{ marginTop: 8, whiteSpace: 'pre-wrap' }}>{job.cover_note}</p>
-                    </details>
+                  {(job.email_context || job.cover_note) && (
+                    <div className="drafts">
+                      {job.email_context && (
+                        <details className="panel">
+                          <summary>Email context</summary>
+                          <p className="body">{job.email_context}</p>
+                        </details>
+                      )}
+                      {job.cover_note && (
+                        <details className="panel">
+                          <summary>Cover note</summary>
+                          <p className="body">{job.cover_note}</p>
+                        </details>
+                      )}
+                    </div>
                   )}
                 </li>
               ))}
             </ul>
           )}
-        </div>
+        </>
       )}
+
+      <footer className="foot">Updated automatically after each daily run.</footer>
     </div>
   );
 }
